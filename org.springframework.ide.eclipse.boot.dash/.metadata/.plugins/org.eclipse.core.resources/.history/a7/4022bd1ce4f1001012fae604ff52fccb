@@ -1,0 +1,24 @@
+package com.bank.employee.entity;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+
+@Entity
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    private String name;
+
+    @NotBlank
+    private String role;
+
+    @NotNull
+    @Positive
+    private Double salary;
+
+    // getters & setters
+}

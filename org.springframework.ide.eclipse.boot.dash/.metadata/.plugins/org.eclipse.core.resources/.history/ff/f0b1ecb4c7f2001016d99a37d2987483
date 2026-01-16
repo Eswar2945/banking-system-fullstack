@@ -1,0 +1,44 @@
+package com.bank.loan.service;
+
+import org.springframework.stereotype.Service;
+import com.bank.loan.repository.LoanRepository;
+import com.bank.loan.entity.Loan;
+import com.bank.common.exception.ResourceNotFoundException;
+
+import java.util.List;
+
+@Service
+public class LoanServiceImpl implements LoanService {
+
+    private final LoanRepository repo;
+
+    public LoanServiceImpl(LoanRepository repo) {
+        this.repo = repo;
+    }
+
+    public Loan create(Loan loan) {
+        return repo.save(loan);
+    }
+
+    public List<Loan> getAll() {
+        return repo.findAll();
+    }
+
+    public Loan getById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Loan not found with id " + id));
+    }
+
+    public Loan update(Long id, Loan loan) {
+        Loan existing = getById(id);
+        existing.setLoanAmount(loan.getLoanAmount());
+        existing.setStatus("APPLIED");
+        return repo.save(existing);
+    }
+
+    public void delete(Long id) {
+        getById(id);
+        repo.deleteById(id);
+    }
+}

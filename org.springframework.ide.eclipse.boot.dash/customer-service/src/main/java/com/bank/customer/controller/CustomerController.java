@@ -1,0 +1,55 @@
+package com.bank.customer.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bank.customer.entity.Customer;
+import com.bank.customer.service.CustomerService;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/customers")
+@CrossOrigin(origins = "http://localhost:4200")
+public class CustomerController {
+
+	private final CustomerService service;
+
+	public CustomerController(CustomerService service) {
+		this.service = service;
+	}
+
+	@PostMapping
+	public Customer create(@Valid @RequestBody Customer customer) {
+		System.out.println("CREATE CUSTOMER: " + customer);
+		return service.create(customer);
+	}
+
+	@GetMapping
+	public List<Customer> getAll() {
+		System.out.println("FETCH ALL CUSTOMERS");
+		return service.getAll();
+	}
+
+	@PutMapping("/{id}")
+	public Customer update(@PathVariable Long id, @Valid @RequestBody Customer customer) {
+		System.out.println("UPDATE CUSTOMER ID: " + id);
+		return service.update(id, customer);
+	}
+
+	@DeleteMapping("/{id}")
+	public String delete(@PathVariable Long id) {
+		System.out.println("DELETE CUSTOMER ID: " + id);
+		service.delete(id);
+		return "Customer deleted successfully";
+	}
+}

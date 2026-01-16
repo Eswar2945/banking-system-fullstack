@@ -1,0 +1,42 @@
+package com.bank.customer.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
+
+import com.bank.customer.entity.Customer;
+import com.bank.customer.service.CustomerService;
+
+@RestController
+@RequestMapping("/customers")
+@CrossOrigin(origins = "http://localhost:4200")
+public class CustomerController {
+
+    @Autowired
+    private CustomerService service;
+
+    @PostMapping
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Customer save(@Valid @RequestBody Customer customer) {
+        return service.create(customer);
+    }
+
+    @GetMapping
+    public List<Customer> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Customer get(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "Customer deleted successfully";
+    }
+}

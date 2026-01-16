@@ -1,0 +1,48 @@
+package com.bank.customer.controller;
+
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import java.util.List;
+import com.bank.customer.entity.Customer;
+import com.bank.customer.service.CustomerService;
+
+@RestController
+@RequestMapping("/customers")
+@CrossOrigin(origins = "http://localhost:4200")
+public class CustomerController {
+
+    private final CustomerService service;
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Customer create(@Valid @RequestBody Customer customer) {
+        System.out.println("CREATE CUSTOMER: " + customer);
+        return service.create(customer);
+    }
+
+    @GetMapping
+    public List<Customer> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Customer getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Customer update(@PathVariable Long id,
+                           @Valid @RequestBody Customer customer) {
+        System.out.println("UPDATE CUSTOMER ID: " + id);
+        return service.update(id, customer);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        System.out.println("DELETE CUSTOMER ID: " + id);
+        service.delete(id);
+    }
+}

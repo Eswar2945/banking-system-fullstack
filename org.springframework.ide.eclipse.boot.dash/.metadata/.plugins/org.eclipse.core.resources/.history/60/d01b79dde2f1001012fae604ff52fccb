@@ -1,0 +1,18 @@
+package com.bank.account.service;
+
+import java.util.List;
+
+import com.bank.account.entity.Account;
+
+public interface AccountService {
+
+	Account create(Account account);
+
+	List<Account> getAll();
+
+	Account getById(Long id);
+
+	Account updateBalance(Long id, Double balance);
+
+	void delete(Long id);
+}

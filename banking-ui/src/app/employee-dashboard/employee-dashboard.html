@@ -1,0 +1,32 @@
+<div class="dashboard">
+  <h2>Employee Dashboard</h2>
+
+  <div class="grid">
+
+    <div class="card" (click)="go('/employees')">
+      <h3>Employees</h3>
+      <p>Manage bank employees</p>
+    </div>
+
+    <div class="card" (click)="go('/customers')">
+      <h3>Customers</h3>
+      <p>View and manage customers</p>
+    </div>
+
+    <div class="card" (click)="go('/accounts')">
+      <h3>Accounts</h3>
+      <p>Create and manage accounts</p>
+    </div>
+
+    <div class="card" (click)="go('/loans')">
+      <h3>Loans</h3>
+      <p>Approve and manage loans</p>
+    </div>
+
+    <div class="card" (click)="go('/transactions')">
+      <h3>Transactions</h3>
+      <p>View all transactions</p>
+    </div>
+
+  </div>
+</div>

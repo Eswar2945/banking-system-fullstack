@@ -1,0 +1,43 @@
+package com.bank.account.service;
+
+import org.springframework.stereotype.Service;
+import com.bank.account.repository.AccountRepository;
+import com.bank.account.entity.Account;
+import com.bank.common.exception.ResourceNotFoundException;
+
+import java.util.List;
+
+@Service
+public class AccountServiceImpl implements AccountService {
+
+    private final AccountRepository repo;
+
+    public AccountServiceImpl(AccountRepository repo) {
+        this.repo = repo;
+    }
+
+    public Account create(Account account) {
+        return repo.save(account);
+    }
+
+    public List<Account> getAll() {
+        return repo.findAll();
+    }
+
+    public Account getById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Account not found with id " + id));
+    }
+
+    public Account update(Long id, Account account) {
+        Account existing = getById(id);
+        existing.setBalance(account.getBalance());
+        return repo.save(existing);
+    }
+
+    public void delete(Long id) {
+        getById(id);
+        repo.deleteById(id);
+    }
+}

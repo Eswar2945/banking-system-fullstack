@@ -1,0 +1,48 @@
+package com.bank.loan.controller;
+
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import java.util.List;
+import com.bank.loan.entity.Loan;
+import com.bank.loan.service.LoanService;
+
+@RestController
+@RequestMapping("/loans")
+@CrossOrigin(origins = "http://localhost:4200")
+public class LoanController {
+
+    private final LoanService service;
+
+    public LoanController(LoanService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Loan create(@Valid @RequestBody Loan loan) {
+    	System.out.println("Loan Created: "+loan);
+        return service.create(loan);
+    }
+
+    @GetMapping
+    public List<Loan> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Loan getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Loan update(@PathVariable Long id,
+                       @Valid @RequestBody Loan loan) {
+    	System.out.println("Loan details Updated: "+id);
+        return service.update(id, loan);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+    	System.out.println("Loan details Updated: "+id);
+        service.delete(id);
+    }
+}

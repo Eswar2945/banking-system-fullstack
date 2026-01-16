@@ -1,0 +1,41 @@
+.form-box {
+  background:#f8fafc;
+  padding:20px;
+  border-radius:8px;
+  max-width:500px;
+  margin-bottom:20px;
+}
+
+label {
+  font-weight:600;
+  display:block;
+  margin-top:10px;
+}
+
+input {
+  width:100%;
+  padding:8px;
+  margin-top:4px;
+}
+
+button {
+  margin-top:15px;
+  padding:10px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:5px;
+  width:100%;
+}
+
+.del { background:#dc2626; }
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th, td {
+  border:1px solid #ccc;
+  padding:8px;
+}

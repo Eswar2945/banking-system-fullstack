@@ -1,0 +1,48 @@
+package com.bank.employee.controller;
+
+import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import java.util.List;
+import com.bank.employee.entity.Employee;
+import com.bank.employee.service.EmployeeService;
+
+@RestController
+@RequestMapping("/employees")
+@CrossOrigin(origins = "http://localhost:4200")
+public class EmployeeController {
+
+    private final EmployeeService service;
+
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
+    }
+
+    @PostMapping
+    public Employee create(@Valid @RequestBody Employee employee) {
+    	System.out.println("New Employee Details Added:"+employee);
+        return service.create(employee);
+    }
+
+    @GetMapping
+    public List<Employee> getAll() {
+        return service.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public Employee getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Employee update(@PathVariable Long id,
+                           @Valid @RequestBody Employee employee) {
+    	System.out.println("Employee Details Updated: "+id);
+        return service.update(id, employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+    	System.out.println("Employee Details Deleted: "+id);
+        service.delete(id);
+    }
+}

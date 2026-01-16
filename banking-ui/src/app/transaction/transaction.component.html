@@ -1,0 +1,31 @@
+<h2>Transaction Management</h2>
+
+<form (ngSubmit)="save()">
+  <label>From Account</label>
+  <input [(ngModel)]="model.fromAccount" name="fromAccount" required>
+
+  <label>To Account</label>
+  <input [(ngModel)]="model.toAccount" name="toAccount" required>
+
+  <label>Amount</label>
+  <input type="number" [(ngModel)]="model.amount" name="amount" required>
+
+  <label>Transaction Type</label>
+  <input [(ngModel)]="model.type" name="type" placeholder="CREDIT / DEBIT" required>
+
+  <button type="submit">Transfer</button>
+</form>
+
+<hr>
+
+<table>
+  <tr>
+  <th>From</th><th>To</th><th>Amount</th><th>Type</th>
+  </tr>
+  <tr *ngFor="let t of list">
+    <td>{{t.fromAccount}}</td>
+    <td>{{t.toAccount}}</td>
+    <td>{{t.amount}}</td>
+    <td>{{t.type}}</td>
+  </tr>
+</table>

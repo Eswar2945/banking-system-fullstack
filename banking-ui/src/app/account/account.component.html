@@ -1,0 +1,32 @@
+<h2>Account Management</h2>
+
+<form (ngSubmit)="save()">
+  <label>Account Number</label>
+  <input type="text" [(ngModel)]="account.accountNumber" name="accountNumber" required>
+
+  <label>Account Type</label>
+  <input type="text" [(ngModel)]="account.accountType" name="accountType" required>
+
+  <label>Balance</label>
+  <input type="number" [(ngModel)]="account.balance" name="balance" required>
+
+  <label>Customer ID</label>
+  <input type="number" [(ngModel)]="account.customerId" name="customerId" required>
+
+  <button type="submit">Create Account</button>
+</form>
+
+<hr>
+
+<table>
+  <tr>
+    <th>Acc No</th><th>Type</th><th>Balance</th><th>Customer</th><th>Action</th>
+  </tr>
+  <tr *ngFor="let a of accounts">
+    <td>{{a.accountNumber}}</td>
+    <td>{{a.accountType}}</td>
+    <td>{{a.balance}}</td>
+    <td>{{a.customerId}}</td>
+    <td><button (click)="delete(a.id!)">Delete</button></td>
+  </tr>
+</table>

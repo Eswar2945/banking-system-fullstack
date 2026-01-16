@@ -1,0 +1,53 @@
+package com.bank.customer.service;
+
+import org.springframework.stereotype.Service;
+import com.bank.customer.repository.CustomerRepository;
+import com.bank.customer.service.CustomerService;
+import com.bank.customer.entity.Customer;
+import com.bank.common.exception.ResourceNotFoundException;
+
+
+import java.util.List;
+
+@Service
+public class CustomerServiceImpl implements CustomerService {
+
+    private final CustomerRepository repo;
+
+    public CustomerServiceImpl(CustomerRepository repo) {
+        this.repo = repo;
+    }
+
+    public Customer create(Customer customer) {
+        return repo.save(customer);
+    }
+
+    public List<Customer> getAll() {
+        return repo.findAll();
+    }
+
+    public Customer getById(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Customer not found with id " + id));
+    }
+    @Override
+    public Customer login(String email, String password) {
+        return repo.findByEmailAndPassword(email, password)
+            .orElseThrow(() -> new RuntimeException("Invalid customer credentials"));
+    }
+
+
+    public Customer update(Long id, Customer customer) {
+        Customer existing = getById(id);
+        existing.setName(customer.getName());
+        existing.setEmail(customer.getEmail());
+        existing.setPassword(customer.getPassword());
+        return repo.save(existing);
+    }
+
+    public void delete(Long id) {
+        getById(id);
+        repo.deleteById(id);
+    }
+}

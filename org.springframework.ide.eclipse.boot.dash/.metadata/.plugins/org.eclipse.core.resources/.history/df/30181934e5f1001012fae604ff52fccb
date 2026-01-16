@@ -1,0 +1,11 @@
+package com.bank.loan.service;
+
+import java.util.List;
+import com.bank.loan.entity.Loan;
+
+public interface LoanService {
+
+    Loan apply(Loan loan);
+    List<Loan> getAll();
+    Loan getById(Long id);
+}

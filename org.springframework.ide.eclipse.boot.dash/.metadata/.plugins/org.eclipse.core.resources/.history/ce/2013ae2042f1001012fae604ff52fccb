@@ -1,0 +1,33 @@
+package com.bank.loan.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bank.loan.entity.Loan;
+import com.bank.loan.service.LoanService;
+
+import jakarta.validation.Valid;
+
+@RestController
+@RequestMapping("/loans")
+public class LoanController {
+
+	@Autowired
+	private LoanService service;
+
+	@PostMapping
+	public Loan apply(@Valid @RequestBody Loan loan) {
+		return service.apply(loan);
+	}
+
+	@GetMapping
+	public List<Loan> getAll() {
+		return service.getAll();
+	}
+}

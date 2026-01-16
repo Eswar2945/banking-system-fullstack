@@ -1,0 +1,30 @@
+<h2>Customer Management</h2>
+
+<form (ngSubmit)="save()">
+  <label>Name</label>
+  <input [(ngModel)]="model.name" name="name" required>
+
+  <label>Email</label>
+  <input [(ngModel)]="model.email" name="email" required>
+
+  <label>Password</label>
+  <input type="password" [(ngModel)]="model.password" name="password" required>
+
+  <label>Phone</label>
+  <input [(ngModel)]="model.phone" name="phone" required>
+
+  <button type="submit">Add Customer</button>
+</form>
+
+<hr>
+
+<table>
+  <tr>
+    <th>Name</th><th>Email</th><th>Phone</th>
+  </tr>
+  <tr *ngFor="let c of list">
+    <td>{{c.name}}</td>
+    <td>{{c.email}}</td>
+    <td>{{c.phone}}</td>
+  </tr>
+</table>

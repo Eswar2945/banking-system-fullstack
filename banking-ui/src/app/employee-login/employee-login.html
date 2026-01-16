@@ -1,0 +1,13 @@
+<h2>Employee Login</h2>
+
+<form (ngSubmit)="login()">
+
+  <label>Username (Admin / Employee ID)</label><br>
+  <input type="text" name="username" [(ngModel)]="username" placeholder="Enter Username"><br><br>
+
+  <label>Password</label><br>
+  <input type="password" name="password" [(ngModel)]="password" placeholder="Enter Password"><br><br>
+
+  <button type="submit">Login</button>
+</form>
+

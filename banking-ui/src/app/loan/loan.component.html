@@ -1,0 +1,35 @@
+<h2>Loan Management</h2>
+
+<form (ngSubmit)="save()">
+  <label>Customer ID</label>
+  <input type="number" [(ngModel)]="model.customerId" name="customerId" required>
+
+  <label>Account ID</label>
+  <input type="number" [(ngModel)]="model.accountId" name="accountId" required>
+
+  <label>Loan Amount</label>
+  <input type="number" [(ngModel)]="model.loanAmount" name="loanAmount" required>
+
+  <label>Interest Rate (%)</label>
+  <input type="number" [(ngModel)]="model.interestRate" name="interestRate" required>
+
+  <label>Tenure (Months)</label>
+  <input type="number" [(ngModel)]="model.tenureMonths" name="tenureMonths" required>
+
+  <button type="submit">Apply Loan</button>
+</form>
+
+<hr>
+
+<table>
+  <tr>
+    <th>Customer</th><th>Account</th><th>Amount</th><th>Rate</th><th>Tenure</th>
+  </tr>
+  <tr *ngFor="let l of list">
+    <td>{{l.customerId}}</td>
+    <td>{{l.accountId}}</td>
+    <td>{{l.loanAmount}}</td>
+    <td>{{l.interestRate}}</td>
+    <td>{{l.tenureMonths}}</td>
+  </tr>
+</table>
